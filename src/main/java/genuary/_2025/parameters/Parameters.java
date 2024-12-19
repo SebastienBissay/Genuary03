@@ -5,16 +5,26 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import static processing.core.PConstants.ADD;
+
 public final class Parameters {
-    public static final long SEED = 20250101;
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 1000;
-    public static final float NOISE_SCALE = 1 / 200f;
-    public static final Color BACKGROUND_COLOR = new Color(220);
-    public static final Color STROKE_COLOR = new Color(24, 11, 5, 120);
+    public static final long SEED = 20250103;
+    public static final int WIDTH = 2025;
+    public static final int HEIGHT = 2025;
+    public static final int BLEND_MODE = ADD;
+    public static final int MINIMUM_NUMBER_OF_ANGLES = 3;
+    public static final int MAXIMUM_NUMBER_OF_ANGLES = 9;
+    public static final int NUMBER_OF_STROKES = 3500;
+    public static final float RADIUS_FACTOR = .4f;
+    public static final float LENGTH_GAUSSIAN_FACTOR = .1f;
+    public static final float MINIMUM_NOISE_SCALE = 1 / 100f;
+    public static final float MAXIMUM_NOISE_SCALE = 1 / 20f;
+    public static final Color BACKGROUND_COLOR = new Color(15);
+    public static final Color STROKE_COLOR_1 = new Color(127, 127, 127, 5);
+    public static final Color STROKE_COLOR_2 = new Color(127, 255, 255, 5);
 
     /**
-     * Helper method to extract the constants in order to genuary._2025.save them to a json file
+     * Helper method to extract the constants in order to save them to a json file
      *
      * @return a Map of the constants (name -> value)
      */
@@ -22,14 +32,14 @@ public final class Parameters {
         Map<String, Object> map = new HashMap<>();
 
         Field[] declaredFields = Parameters.class.getDeclaredFields();
-        for(Field field : declaredFields) {
+        for (Field field : declaredFields) {
             map.put(field.getName(), field.get(Parameters.class));
         }
 
         return Collections.singletonMap(Parameters.class.getSimpleName(), map);
     }
 
-    public record Color (float red, float green, float blue, float alpha) {
+    public record Color(float red, float green, float blue, float alpha) {
         public Color(float red, float green, float blue) {
             this(red, green, blue, 255);
         }
